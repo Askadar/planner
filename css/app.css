@@ -1,0 +1,96 @@
+.A5 {
+    width: 900px;
+    height: 1272px;
+    border: 1px solid #ccc;
+    margin: auto;
+    background-image: url(/img/loli-molang-bottom.jpg);
+    background-position: -25px 620px;
+    background-repeat: repeat-x;
+}
+
+.caps {
+    text-transform: uppercase;
+}
+
+h1, h2, h3, h4, h5, h6, body {
+    font-family: Futura;
+}
+
+span.round.day {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    border: 1px outset black;
+    border-radius: 50%;
+    text-align: center;
+    padding: 0.7rem 0;
+    font-size: 0.95rem;
+    margin: 0 0.5rem;
+}
+
+span.round.day:last-child {
+    margin-right: 0;
+}
+
+span.round.day:first-child {
+    margin-left: 0;
+}
+
+.border-down {
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid black;
+}
+
+body table {
+    background: none;
+}
+
+table tbody tr:nth-child(even) {
+    background: none;
+}
+
+table tbody, table thead {
+    border: none;
+    background: none;
+}
+
+body {
+    font-size: 20px
+}
+
+table th {
+    font-weight: bold;
+    font-size: 1.4rem;
+    font-family: Futura Light;
+}
+
+table td {
+    background: none;
+}
+
+.water-container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.water {
+    width: 2rem;
+    height: 2rem;
+    margin: 0 0.7rem;
+    display: inline-block;
+    background-image: url(/img/glass-of-water.svg)
+}
+
+.myTab {
+    margin: 1rem;
+    border: 1px outset black;
+    border-radius: 1px;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
+}
+
+.myTab:after {
+    content: attr(data-header);
+    text-align: center;
+    display: block;
+    background: #eee;
+}

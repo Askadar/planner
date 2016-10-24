@@ -1,0 +1,140 @@
+//colors
+$color_celeste_approx: #ccc
+$black:  black
+$black_40: rgba(0, 0, 0, 0.4)
+$color_gallery_approx: #eee
+
+//fonts
+$font_0: Futura
+$font_1: Futura Light
+
+//urls
+$url_0: url(/img/loli-molang-bottom.jpg)
+$url_1: url(/img/glass-of-water.svg)
+$url_2: url(/img/loli-molang-left.svg)
+
+// mixins
+=stripes-background($angle, $interval, $fillColor, $stripeColor)
+	background-image: repeating-linear-gradient($angle, $stripeColor 1px, $fillColor 2px, $fillColor $interval, $stripeColor $interval+1)
+
+.A5
+	width: 900px
+	height: 1272px
+	border: 1px solid $color_celeste_approx
+	margin: auto
+	background-image: $url_0
+	background-position: -25px 620px
+	background-repeat: repeat-x
+
+.caps
+	text-transform: uppercase
+
+h1, h2, h3, h4, h5, h6
+	font-family: $font_0
+
+body
+	font-family: $font_0
+	font-size: 20px
+	table
+		background: none
+
+
+.border-down
+	padding-bottom: 0.5rem
+	border-bottom: 2px solid $black
+
+table
+	tbody
+		border: none
+		background: none
+		tr:nth-child(even)
+			background: none
+
+
+	thead
+		border: none
+		background: none
+
+	th
+		font-weight: bold
+		font-size: 1.4rem
+		font-family: $font_1
+
+	td
+		background: none
+.left.todos
+	background-image: $url_2
+	background-repeat: no-repeat
+	background-size: 100%
+	ul
+		list-style: none
+		li.done
+			text-decoration: line-through
+		li
+			border-bottom: 1px solid rgba(25,70,120,0.6)
+			padding: 0.25rem
+			user-select: none
+			cursor: default
+			position: relative
+			.fa
+				margin-right: 0.5rem
+				width: 1em
+			input
+				+stripes-background(45deg,10px, transparent, rgba(70,120,200,0.4))
+				width: 75%
+				display: inline-block
+				margin: 0
+			input + button
+				margin-left: 1rem
+			.remove
+				display: none
+				position: absolute
+				right: 0.25rem
+				top: 0.5rem
+		li:hover .remove
+			display: inline-block
+
+
+		// 	margin: 1rem 0
+		// 	textarea
+		// 		background: transparent
+
+.water-container
+	width: 90%
+	margin: 0 auto
+
+.water
+	width: 2rem
+	height: 2rem
+	margin: 0 0.7rem
+	display: inline-block
+	background-image: $url_1
+
+.myTab
+	margin: 1rem
+	border: 1px outset $black
+	border-radius: 1px
+	box-shadow: 0 0 2px 1px $black_40
+	&:after
+		content: attr(data-header)
+		text-align: center
+		display: block
+		background: $color_gallery_approx
+
+
+span.round.day
+	display: inline-block
+	width: 3rem
+	height: 3rem
+	border: 1px outset $black
+	//If you use compass, instead of the line below you could use + border-radius($radius, $vertical-radius)
+	border-radius: 50%
+	text-align: center
+	padding: 0.7rem 0
+	font-size: 0.95rem
+	margin: 0 0.5rem
+	&:last-child
+		margin-right: 0
+
+	&:first-child
+		margin-left: 0

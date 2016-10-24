@@ -1,0 +1,15 @@
+<template>
+	<!-- <require from="dragula"></require> -->
+	<div class="todos">
+		<dragula-and-drop drop-fn.call="drop(item, target, source, sibling, itemVM, siblingVM)"></dragula-and-drop>
+		<ul class="drag-source drop-target" data-list="todos">
+			<compose view-model.bind="todo" repeat.for="todo of todos" data-id.one-time="todo.id"></compose>
+			<li>
+				<form submit.trigger="addTodo()">
+					<input type="text" value.bind="text">
+					<button type="submit"><i class="fa fa-check"></i></button>
+				</form>
+			</li>
+		</ul>
+	</div>
+</template>

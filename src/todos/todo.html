@@ -1,0 +1,7 @@
+<template>
+	<li class="${todo.done ? 'done' : ''}" click.trigger="todo.toggleDone()">
+		<i class="fa ${todo.done ? 'fa-check' : 'fa-square-o'}"></i>
+		<span>${todo.text}</span>
+		<button class="remove" click.trigger="removeTodo(todo)"><i class="fa fa-times"></i></button>
+	</li>
+</template>
