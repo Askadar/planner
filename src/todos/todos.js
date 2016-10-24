@@ -19,7 +19,7 @@ export class Todos {
 		}
 	}
 	removeTodo(todo) {
-		this.todos = this.todos.filter(td=>td === todo);
+		this.todos = this.todos.filter(td=>td !== todo);
 	}
 	toggleTodo(todo) {
 		let i = this.todos.indexOf(todo);

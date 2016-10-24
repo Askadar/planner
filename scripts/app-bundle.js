@@ -219,7 +219,7 @@ define('todos/todos',['exports', './todo', 'aurelia-dragula', '../store'], funct
 
 		Todos.prototype.removeTodo = function removeTodo(todo) {
 			this.todos = this.todos.filter(function (td) {
-				return td === todo;
+				return td !== todo;
 			});
 		};
 
