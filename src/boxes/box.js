@@ -1,5 +1,8 @@
 export class Box {
-  constructor() {
-    this.header = 'Testing';
-  }
+	constructor(box) {
+		this.header = box.header;
+		this.height = box.height;
+		this.size = box.size;
+		this.class = box.class ? box.class : 'myTab';
+	}
 }

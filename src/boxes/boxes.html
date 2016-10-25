@@ -1,0 +1,6 @@
+<template>
+	<dragula-and-drop drop-fn.call="drop(item, target, source, sibling, itemVM, siblingVM)"></dragula-and-drop>
+	<div class="drag-source drop-target" data-list="boxes">
+			<compose view-model.bind="box" repeat.for="box of boxes" data-id.one-time="box.id"></compose>
+	</div>
+</template>

@@ -1,6 +1,7 @@
 <template>
 	<require from="./app.css"></require>
 	<require from="./todos/todos"></require>
+	<require from="./boxes/boxes"></require>
 
 	<div class="A5">
 		<div class="medium-12 columns">
@@ -27,34 +28,7 @@
 				<todos></todos>
 			</div>
 			<div class="medium-8 columns">
-				<div class="medium-12 columns">
-					<div class="myTab" style="height:8rem;" data-header="today I'm grateful for"></div>
-				</div>
-				<div class="medium-12 columns">
-					<div class="myTab" style="height:8rem;" data-header="daily goals"></div>
-				</div>
-				<div class="medium-4 columns">
-					<div class="myTab" style="height:8rem;" data-header="breakfast"></div>
-				</div>
-				<div class="medium-4 columns">
-					<div class="myTab" style="height:8rem;" data-header="lunch"></div>
-				</div>
-				<div class="medium-4 columns">
-					<div class="myTab" style="height:8rem;" data-header="dinner"></div>
-				</div>
-				<div class="medium-12 columns">
-					<div class="water-container">water: <i class="water"></i> <i class="water"></i> <i class="water"></i> <i class="water"></i> <i class="water"></i>						<i class="water"></i> <i class="water"></i></div>
-				</div>
-				<div class="medium-12 columns">
-					<div class="myTab" style="height:6rem;" data-header="snacks"></div>
-				</div>
-				<div class="medium-6 columns">
-					<div class="myTab" style="height:6rem;" data-header="fitness"></div>
-				</div>
-				<div class="medium-6 columns">
-					<div class="myTab" style="height:6rem;" data-header="mood"></div>
-				</div>
-
+				<boxes></boxes>
 			</div>
 		</div>
 	</div>

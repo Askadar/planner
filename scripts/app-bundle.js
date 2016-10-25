@@ -66,7 +66,7 @@ define('main',['exports', './environment'], function (exports, _environment) {
 		});
 	}
 });
-define('store',['exports', './todos/todo'], function (exports, _todo) {
+define('store',['exports', './todos/todo', './boxes/box'], function (exports, _todo, _box) {
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -103,7 +103,8 @@ define('store',['exports', './todos/todo'], function (exports, _todo) {
 			_classCallCheck(this, Storage);
 
 			this.store = {
-				todos: [new _todo.Todo('Zaggu'), new _todo.Todo('zangos')]
+				todos: [new _todo.Todo('Zaggu'), new _todo.Todo('zangos')],
+				boxes: [new _box.Box({ size: 12, height: 8, header: "today I'm grateful for" }), new _box.Box({ size: 12, height: 8, header: "daily goals" }), new _box.Box({ size: 4, height: 8, header: "breakfast" }), new _box.Box({ size: 4, height: 8, header: "lunch" }), new _box.Box({ size: 4, height: 8, header: "dinner" }), new _box.Box({ size: 12, height: 6, header: "water", class: "water-container" }), new _box.Box({ size: 12, height: 6, header: "snacks" }), new _box.Box({ size: 6, height: 6, header: "fitness" }), new _box.Box({ size: 6, height: 6, header: "mood" })]
 			};
 		}
 
@@ -112,29 +113,37 @@ define('store',['exports', './todos/todo'], function (exports, _todo) {
 			get: function get() {
 				return this.store.todos;
 			}
+		}, {
+			key: 'boxes',
+			get: function get() {
+				return this.store.boxes;
+			}
 		}]);
 
 		return Storage;
 	}();
 });
 define('boxes/box',['exports'], function (exports) {
-  'use strict';
+	'use strict';
 
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
+	function _classCallCheck(instance, Constructor) {
+		if (!(instance instanceof Constructor)) {
+			throw new TypeError("Cannot call a class as a function");
+		}
+	}
 
-  var Box = exports.Box = function Box() {
-    _classCallCheck(this, Box);
+	var Box = exports.Box = function Box(box) {
+		_classCallCheck(this, Box);
 
-    this.header = 'Testing';
-  };
+		this.header = box.header;
+		this.height = box.height;
+		this.size = box.size;
+		this.class = box.class ? box.class : 'myTab';
+	};
 });
 define('resources/index',["exports"], function (exports) {
   "use strict";
@@ -1182,9 +1191,48 @@ define('aurelia-dragula/move-before',["exports"], function (exports) {
     }
   }
 });
-define('text!app.html', ['module'], function(module) { module.exports = "<template>\n\t<require from=\"./app.css\"></require>\n\t<require from=\"./todos/todos\"></require>\n\n\t<div class=\"A5\">\n\t\t<div class=\"medium-12 columns\">\n\t\t\t<div class=\"medium-4 columns\">\n\t\t\t\t<h2 class=\"caps\">Day Planner</h2>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"medium-12 columns border-down\">\n\t\t\t<div class=\"medium-4 columns\">\n\t\t\t\t<h4>____ /____ /____</h4>\n\t\t\t</div>\n\t\t\t<div class=\"medium-8 columns\">\n\t\t\t\t<span class=\"round day\">Mo</span>\n\t\t\t\t<span class=\"round day\">Tu</span>\n\t\t\t\t<span class=\"round day\">We</span>\n\t\t\t\t<span class=\"round day\">Th</span>\n\t\t\t\t<span class=\"round day\">Fr</span>\n\t\t\t\t<span class=\"round day\">Sa</span>\n\t\t\t\t<span class=\"round day\">Su</span>\n\t\t\t</div>\n\t\t</div>\n\t\t<div>\n\t\t\t<div class=\"medium-4 columns todos left\">\n\t\t\t\t<todos></todos>\n\t\t\t</div>\n\t\t\t<div class=\"medium-8 columns\">\n\t\t\t\t<div class=\"medium-12 columns\">\n\t\t\t\t\t<div class=\"myTab\" style=\"height:8rem;\" data-header=\"today I'm grateful for\"></div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"medium-12 columns\">\n\t\t\t\t\t<div class=\"myTab\" style=\"height:8rem;\" data-header=\"daily goals\"></div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"medium-4 columns\">\n\t\t\t\t\t<div class=\"myTab\" style=\"height:8rem;\" data-header=\"breakfast\"></div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"medium-4 columns\">\n\t\t\t\t\t<div class=\"myTab\" style=\"height:8rem;\" data-header=\"lunch\"></div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"medium-4 columns\">\n\t\t\t\t\t<div class=\"myTab\" style=\"height:8rem;\" data-header=\"dinner\"></div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"medium-12 columns\">\n\t\t\t\t\t<div class=\"water-container\">water: <i class=\"water\"></i> <i class=\"water\"></i> <i class=\"water\"></i> <i class=\"water\"></i> <i class=\"water\"></i>\t\t\t\t\t\t<i class=\"water\"></i> <i class=\"water\"></i></div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"medium-12 columns\">\n\t\t\t\t\t<div class=\"myTab\" style=\"height:6rem;\" data-header=\"snacks\"></div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"medium-6 columns\">\n\t\t\t\t\t<div class=\"myTab\" style=\"height:6rem;\" data-header=\"fitness\"></div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"medium-6 columns\">\n\t\t\t\t\t<div class=\"myTab\" style=\"height:6rem;\" data-header=\"mood\"></div>\n\t\t\t\t</div>\n\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\n\t<script src=\"js/vendor/jquery.js\"></script>\n\t<script src=\"js/vendor/what-input.js\"></script>\n\t<script src=\"js/vendor/foundation.js\"></script>\n\t<script src=\"js/app.js\"></script>\n</template>\n"; });
-define('text!app.css', ['module'], function(module) { module.exports = ".A5 {\n  width: 900px;\n  height: 1272px;\n  border: 1px solid #ccc;\n  margin: auto;\n  background-image: url(/img/loli-molang-bottom.jpg);\n  background-position: -25px 620px;\n  background-repeat: repeat-x; }\n\n.caps {\n  text-transform: uppercase; }\n\nh1, h2, h3, h4, h5, h6 {\n  font-family: Futura; }\n\nbody {\n  font-family: Futura;\n  font-size: 20px; }\n  body table {\n    background: none; }\n\n.border-down {\n  padding-bottom: 0.5rem;\n  border-bottom: 2px solid black; }\n\ntable tbody {\n  border: none;\n  background: none; }\n  table tbody tr:nth-child(even) {\n    background: none; }\n\ntable thead {\n  border: none;\n  background: none; }\n\ntable th {\n  font-weight: bold;\n  font-size: 1.4rem;\n  font-family: Futura Light; }\n\ntable td {\n  background: none; }\n\n.left.todos {\n  background-image: url(/img/loli-molang-left.svg);\n  background-repeat: no-repeat;\n  background-size: 100%; }\n  .left.todos ul {\n    list-style: none; }\n    .left.todos ul li.done {\n      text-decoration: line-through; }\n    .left.todos ul li {\n      border-bottom: 1px solid rgba(25, 70, 120, 0.6);\n      padding: 0.25rem;\n      user-select: none;\n      cursor: default;\n      position: relative; }\n      .left.todos ul li .fa {\n        margin-right: 0.5rem;\n        width: 1em; }\n      .left.todos ul li input {\n        background-image: repeating-linear-gradient(45deg, rgba(70, 120, 200, 0.4) 1px, transparent 2px, transparent 10px, rgba(70, 120, 200, 0.4) 11px);\n        width: 75%;\n        display: inline-block;\n        margin: 0; }\n      .left.todos ul li input + button {\n        margin-left: 1rem; }\n      .left.todos ul li .remove {\n        display: none;\n        position: absolute;\n        right: 0.25rem;\n        top: 0.5rem; }\n    .left.todos ul li:hover .remove {\n      display: inline-block; }\n\n.water-container {\n  width: 90%;\n  margin: 0 auto; }\n\n.water {\n  width: 2rem;\n  height: 2rem;\n  margin: 0 0.7rem;\n  display: inline-block;\n  background-image: url(/img/glass-of-water.svg); }\n\n.myTab {\n  margin: 1rem;\n  border: 1px outset black;\n  border-radius: 1px;\n  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4); }\n  .myTab:after {\n    content: attr(data-header);\n    text-align: center;\n    display: block;\n    background: #eee; }\n\nspan.round.day {\n  display: inline-block;\n  width: 3rem;\n  height: 3rem;\n  border: 1px outset black;\n  border-radius: 50%;\n  text-align: center;\n  padding: 0.7rem 0;\n  font-size: 0.95rem;\n  margin: 0 0.5rem; }\n  span.round.day:last-child {\n    margin-right: 0; }\n  span.round.day:first-child {\n    margin-left: 0; }\n"; });
-define('text!boxes/box.html', ['module'], function(module) { module.exports = "<template>\r\n    \r\n</template>"; });
-define('text!todos/todos.html', ['module'], function(module) { module.exports = "<template>\r\n\t<!-- <require from=\"dragula\"></require> -->\r\n\t<div class=\"todos\">\r\n\t\t<dragula-and-drop drop-fn.call=\"drop(item, target, source, sibling, itemVM, siblingVM)\"></dragula-and-drop>\r\n\t\t<ul class=\"drag-source drop-target\" data-list=\"todos\">\r\n\t\t\t<compose view-model.bind=\"todo\" repeat.for=\"todo of todos\" data-id.one-time=\"todo.id\"></compose>\r\n\t\t\t<li>\r\n\t\t\t\t<form submit.trigger=\"addTodo()\">\r\n\t\t\t\t\t<input type=\"text\" value.bind=\"text\">\r\n\t\t\t\t\t<button type=\"submit\"><i class=\"fa fa-check\"></i></button>\r\n\t\t\t\t</form>\r\n\t\t\t</li>\r\n\t\t</ul>\r\n\t</div>\r\n</template>\r\n"; });
+define('boxes/boxes',['exports', 'aurelia-dragula', '../store'], function (exports, _aureliaDragula, _store) {
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.Boxes = undefined;
+
+	function _classCallCheck(instance, Constructor) {
+		if (!(instance instanceof Constructor)) {
+			throw new TypeError("Cannot call a class as a function");
+		}
+	}
+
+	var _class, _temp;
+
+	var Boxes = exports.Boxes = (_temp = _class = function () {
+		function Boxes(store) {
+			_classCallCheck(this, Boxes);
+
+			this.boxes = store.boxes;
+			console.log(store);
+			this.dragula = new _aureliaDragula.Dragula();
+		}
+
+		Boxes.prototype.drop = function drop(item, x, y, sibling) {
+			var a = item.dataset.id;
+			var b = sibling ? sibling.dataset.id : null;
+			(0, _aureliaDragula.moveBefore)(this.boxes, function (box) {
+				return box.id === a;
+			}, function (box) {
+				return box.id === b;
+			});
+		};
+
+		return Boxes;
+	}(), _class.inject = [_store.Storage], _temp);
+});
+define('text!app.html', ['module'], function(module) { module.exports = "<template>\n\t<require from=\"./app.css\"></require>\n\t<require from=\"./todos/todos\"></require>\n\t<require from=\"./boxes/boxes\"></require>\n\n\t<div class=\"A5\">\n\t\t<div class=\"medium-12 columns\">\n\t\t\t<div class=\"medium-4 columns\">\n\t\t\t\t<h2 class=\"caps\">Day Planner</h2>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"medium-12 columns border-down\">\n\t\t\t<div class=\"medium-4 columns\">\n\t\t\t\t<h4>____ /____ /____</h4>\n\t\t\t</div>\n\t\t\t<div class=\"medium-8 columns\">\n\t\t\t\t<span class=\"round day\">Mo</span>\n\t\t\t\t<span class=\"round day\">Tu</span>\n\t\t\t\t<span class=\"round day\">We</span>\n\t\t\t\t<span class=\"round day\">Th</span>\n\t\t\t\t<span class=\"round day\">Fr</span>\n\t\t\t\t<span class=\"round day\">Sa</span>\n\t\t\t\t<span class=\"round day\">Su</span>\n\t\t\t</div>\n\t\t</div>\n\t\t<div>\n\t\t\t<div class=\"medium-4 columns todos left\">\n\t\t\t\t<todos></todos>\n\t\t\t</div>\n\t\t\t<div class=\"medium-8 columns\">\n\t\t\t\t<boxes></boxes>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\n\t<script src=\"js/vendor/jquery.js\"></script>\n\t<script src=\"js/vendor/what-input.js\"></script>\n\t<script src=\"js/vendor/foundation.js\"></script>\n\t<script src=\"js/app.js\"></script>\n</template>\n"; });
+define('text!boxes/box.html', ['module'], function(module) { module.exports = "<template>\r\n\t<div class=\"medium-${size} columns\">\r\n\t\t<div class=\"${class}\" style=\"height:${height}rem;\" data-header=\"${header}\"></div>\r\n\t</div>\r\n</template>\r\n"; });
 define('text!todos/todo.html', ['module'], function(module) { module.exports = "<template>\r\n\t<li class=\"${todo.done ? 'done' : ''}\" click.trigger=\"todo.toggleDone()\">\r\n\t\t<i class=\"fa ${todo.done ? 'fa-check' : 'fa-square-o'}\"></i>\r\n\t\t<span>${todo.text}</span>\r\n\t\t<button class=\"remove\" click.trigger=\"removeTodo(todo)\"><i class=\"fa fa-times\"></i></button>\r\n\t</li>\r\n</template>\r\n"; });
+define('text!app.css', ['module'], function(module) { module.exports = ".A5 {\n  width: 900px;\n  height: 1272px;\n  border: 1px solid #ccc;\n  margin: auto;\n  background-image: url(/img/loli-molang-bottom.jpg);\n  background-position: -25px 620px;\n  background-repeat: repeat-x; }\n\n.caps {\n  text-transform: uppercase; }\n\nh1, h2, h3, h4, h5, h6 {\n  font-family: Futura; }\n\nbody {\n  font-family: Futura;\n  font-size: 20px; }\n  body table {\n    background: none; }\n\n.border-down {\n  padding-bottom: 0.5rem;\n  border-bottom: 2px solid black; }\n\ntable tbody {\n  border: none;\n  background: none; }\n  table tbody tr:nth-child(even) {\n    background: none; }\n\ntable thead {\n  border: none;\n  background: none; }\n\ntable th {\n  font-weight: bold;\n  font-size: 1.4rem;\n  font-family: Futura Light; }\n\ntable td {\n  background: none; }\n\n.left.todos {\n  background-image: url(/img/loli-molang-left.svg);\n  background-repeat: no-repeat;\n  background-size: 100%; }\n  .left.todos ul {\n    list-style: none; }\n    .left.todos ul li.done {\n      text-decoration: line-through; }\n    .left.todos ul li {\n      border-bottom: 1px solid rgba(25, 70, 120, 0.6);\n      padding: 0.25rem;\n      user-select: none;\n      cursor: default;\n      position: relative; }\n      .left.todos ul li .fa {\n        margin-right: 0.5rem;\n        width: 1em; }\n      .left.todos ul li input {\n        background-image: repeating-linear-gradient(45deg, rgba(70, 120, 200, 0.4) 1px, transparent 2px, transparent 10px, rgba(70, 120, 200, 0.4) 11px);\n        width: 75%;\n        display: inline-block;\n        margin: 0; }\n      .left.todos ul li input + button {\n        margin-left: 1rem; }\n      .left.todos ul li .remove {\n        display: none;\n        position: absolute;\n        right: 0.25rem;\n        top: 0.5rem; }\n    .left.todos ul li:hover .remove {\n      display: inline-block; }\n\n.water-container {\n  width: 90%;\n  margin: 0 auto; }\n\n.water {\n  width: 2rem;\n  height: 2rem;\n  margin: 0 0.7rem;\n  display: inline-block;\n  background-image: url(/img/glass-of-water.svg); }\n\n.myTab {\n  margin: 1rem;\n  border: 1px outset black;\n  border-radius: 1px;\n  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4); }\n  .myTab:after {\n    content: attr(data-header);\n    text-align: center;\n    display: block;\n    background: #eee; }\n\nspan.round.day {\n  display: inline-block;\n  width: 3rem;\n  height: 3rem;\n  border: 1px outset black;\n  border-radius: 50%;\n  text-align: center;\n  padding: 0.7rem 0;\n  font-size: 0.95rem;\n  margin: 0 0.5rem; }\n  span.round.day:last-child {\n    margin-right: 0; }\n  span.round.day:first-child {\n    margin-left: 0; }\n"; });
+define('text!todos/todos.html', ['module'], function(module) { module.exports = "<template>\r\n\t<!-- <require from=\"dragula\"></require> -->\r\n\t<div class=\"todos\">\r\n\t\t<dragula-and-drop drop-fn.call=\"drop(item, target, source, sibling, itemVM, siblingVM)\"></dragula-and-drop>\r\n\t\t<ul class=\"drag-source drop-target\" data-list=\"todos\">\r\n\t\t\t<compose view-model.bind=\"todo\" repeat.for=\"todo of todos\" data-id.one-time=\"todo.id\"></compose>\r\n\t\t\t<li>\r\n\t\t\t\t<form submit.trigger=\"addTodo()\">\r\n\t\t\t\t\t<input type=\"text\" value.bind=\"text\">\r\n\t\t\t\t\t<button type=\"submit\"><i class=\"fa fa-check\"></i></button>\r\n\t\t\t\t</form>\r\n\t\t\t</li>\r\n\t\t</ul>\r\n\t</div>\r\n</template>\r\n"; });
+define('text!boxes/boxes.html', ['module'], function(module) { module.exports = "<template>\r\n\t<dragula-and-drop drop-fn.call=\"drop(item, target, source, sibling, itemVM, siblingVM)\"></dragula-and-drop>\r\n\t<div class=\"drag-source drop-target\" data-list=\"boxes\">\r\n\t\t\t<compose view-model.bind=\"box\" repeat.for=\"box of boxes\" data-id.one-time=\"box.id\"></compose>\r\n\t</div>\r\n</template>\r\n"; });
 //# sourceMappingURL=app-bundle.js.map
